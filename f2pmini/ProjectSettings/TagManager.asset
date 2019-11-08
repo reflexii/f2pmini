@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Objects
+  - Post Processing
+  - Walls
+  - Background_red
+  - Player
   - 
   - 
   - 
@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2619524471
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 1997439731
+    locked: 0
+  - name: Background_red
+    uniqueID: 553852957
     locked: 0

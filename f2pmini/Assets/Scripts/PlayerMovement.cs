@@ -14,24 +14,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private Vector2 endingTouchPosition;
-
+    private Vector2 ballDirection;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         line = GetComponent<LineRenderer>();
         line.enabled = false;
-        rb.gravityScale = 0f;
     }
     void Update()
     {
         
-        if (launched)
+        if (!launched)
         {
-            rb.gravityScale = 1f;
+            TouchMovement();
         }
-
-        TouchMovement();
         
     }
 
@@ -65,10 +62,9 @@ public class PlayerMovement : MonoBehaviour
             if (touch.phase == TouchPhase.Ended && !launched)
             {
                 endingTouchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-                Vector2 direction = (endingTouchPosition - startTouchPosition).normalized;
+                ballDirection = (endingTouchPosition - startTouchPosition).normalized;
 
-                rb.AddForce(power * direction, ForceMode2D.Impulse);
-
+                rb.AddForce(ballDirection * power, ForceMode2D.Impulse);
 
                 touching = false;
                 launched = true;
@@ -78,14 +74,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawCube(currentTouchPosition, new Vector3(1f, 1f, 0f));
-    }
-
-    //For testing, not used in actual game
-    void MouseMovement()
+    void UpdateTraveledAmount()
     {
 
     }
+
 }
