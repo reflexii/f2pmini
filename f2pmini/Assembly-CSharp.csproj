@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BlockDestroyer.cs" />
+    <Compile Include="Assets\Scripts\Deadzone.cs" />
     <Compile Include="Assets\Scripts\DropShadow.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MapProperties.cs" />

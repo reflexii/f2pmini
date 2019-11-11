@@ -1,18 +1,86 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using TMPro;
 
 public class MapProperties : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public List<GameObject> wallList;
+    public GameObject deadZonePrefab;
+    public float deadZonePadding = 2f;
+    public float goalAmount = 80f;
+    public TextMeshProUGUI goalText;
+    public TextMeshProUGUI currentText;
+
+    private GameManager gm;
+
+
+    private void Awake()
     {
-        
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        AddWallObjectsToList();
+        CreateDeadzonesAroundLevel();
+
+        goalText.text = "/ " + goalAmount.ToString();
+    }
+
+    private void Update()
+    {
+        UpdateUI();
+    }
+
+    public void AddWallObjectsToList()
+    {
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (go.layer == LayerMask.NameToLayer("Walls"))
+            {
+                wallList.Add(go);
+            }
+        }
+    }
+
+    public void ResetLevel()
+    {
+        foreach (GameObject g in wallList)
+        {
+            g.SetActive(true);
+        }
+    }
+
+    public void CreateDeadzonesAroundLevel()
+    {
+        Camera camera = Camera.main;
+
+        float height = camera.orthographicSize * 2f;
+        float width = camera.aspect * height;
+
+        GameObject bottom = Instantiate(deadZonePrefab, new Vector3(0, (-height/2f) - 0.5f - deadZonePadding, 0), Quaternion.identity);
+        bottom.transform.localScale = new Vector3(width + 2f + deadZonePadding*2f, 1f, 1f);
+        GameObject top = Instantiate(deadZonePrefab, new Vector3(0f, height/2f + 0.5f + deadZonePadding, 0), Quaternion.identity);
+        top.transform.localScale = new Vector3(width + 2f + deadZonePadding*2f, 1f, 1f);
+        GameObject left = Instantiate(deadZonePrefab, new Vector3((-width/2f) - 0.5f - deadZonePadding, 0f, 0), Quaternion.identity);
+        left.transform.localScale = new Vector3(1f, height + deadZonePadding*2f, 1f);
+        GameObject right = Instantiate(deadZonePrefab, new Vector3((width/2f) + 0.5f + deadZonePadding, 0f, 0), Quaternion.identity);
+        right.transform.localScale = new Vector3(1f, height + deadZonePadding*2f, 1f);
+    }
+
+    public void UpdateUI()
+    {
+        if (gm.playerMovement.launched)
+        {
+            float x = gm.playerMovement.distanceTravelled;
+            double rounded = Math.Round(x, 2);
+            currentText.text = rounded.ToString();
+        } else
+        {
+            currentText.text = "0";
+        }
     }
 }
