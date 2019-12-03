@@ -13,6 +13,7 @@ public class MapProperties : MonoBehaviour
     public float goalAmount = 80f;
     public TextMeshProUGUI goalText;
     public TextMeshProUGUI currentText;
+    public float distanceTravelled = 0f;
 
     private GameManager gm;
 
@@ -39,7 +40,7 @@ public class MapProperties : MonoBehaviour
     {
         foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
         {
-            if (go.layer == LayerMask.NameToLayer("Walls"))
+            if (go.layer == LayerMask.NameToLayer("WhiteWalls"))
             {
                 wallList.Add(go);
             }
@@ -75,9 +76,7 @@ public class MapProperties : MonoBehaviour
     {
         if (gm.playerMovement.launched)
         {
-            float x = gm.playerMovement.distanceTravelled;
-            double rounded = Math.Round(x, 2);
-            currentText.text = rounded.ToString();
+            currentText.text = Mathf.Floor(distanceTravelled).ToString();
         } else
         {
             currentText.text = "0";

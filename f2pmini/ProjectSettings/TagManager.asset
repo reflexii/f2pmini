@@ -16,11 +16,11 @@ TagManager:
   - Background
   - Objects
   - Post Processing
-  - Walls
+  - WhiteWalls
+  - BlackWalls
   - Background_red
   - Player
-  - 
-  - 
+  - NoWallCollision
   - 
   - 
   - 

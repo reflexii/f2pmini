@@ -9,8 +9,12 @@ public class BlockDestroyer : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             //TODO: animation
-
-            gameObject.SetActive(false);
+            if (collision.gameObject.GetComponent<Ball>() != null) {
+                if (!collision.gameObject.GetComponent<Ball>().testBall) {
+                    gameObject.SetActive(false);
+                }
+            }
+            
         }
     }
 }
