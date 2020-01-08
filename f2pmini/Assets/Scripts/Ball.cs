@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 
     public float distanceTravelled = 0f;
     public Vector2 ballDirection;
+    public Vector2 launchedBallDirection;
     public bool testBall = false;
     public GameObject raycastLeft;
     public GameObject raycastRight;

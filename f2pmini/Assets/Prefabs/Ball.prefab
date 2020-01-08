@@ -282,9 +282,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceTravelled: 0
   ballDirection: {x: 0, y: 0}
+  launchedBallDirection: {x: 0, y: 0}
   testBall: 0
   raycastLeft: {fileID: 7301992131053237032}
   raycastRight: {fileID: 3160602633512708217}
+  balltesterCollider: {fileID: 0}
 --- !u!1 &1500254534076880766
 GameObject:
   m_ObjectHideFlags: 0

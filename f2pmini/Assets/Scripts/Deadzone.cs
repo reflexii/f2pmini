@@ -17,7 +17,13 @@ public class Deadzone : MonoBehaviour
         {
             //TODO: Animation / Effect?
             Destroy(collision.gameObject);
-            gm.ResetLevel();
+
+            if (collision.gameObject.GetComponent<Ball>() != null) {
+                if (!collision.gameObject.GetComponent<Ball>().testBall) {
+                    gm.ResetLevel();
+                }
+            }
+            
         }
     }
 }
